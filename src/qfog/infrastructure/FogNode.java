@@ -5,10 +5,8 @@
  */
 package qfog.infrastructure;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import qfog.application.Component;
-import qfog.utils.Coordinates;
 import qfog.utils.Node;
 
 /**
@@ -47,12 +45,12 @@ public class FogNode extends Node{
 
     @Override
     public void deploy(Component s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setHardware(this.getHardware()-s.getHardwareRequirements());
     }
 
     @Override
     public void undeploy(Component s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setHardware(this.getHardware()+s.getHardwareRequirements());
     }
     
 }

@@ -8,6 +8,8 @@ package qfog.application;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import qfog.utils.Link;
 
 /**
  *
@@ -15,15 +17,16 @@ import java.util.HashSet;
  */
 public class Component {
     String identifier;
-    ArrayList<String> softwareReqs;
+    List<String> softwareReqs;
     int hardwareReqs;
     
-    public Component(String identifier, ArrayList<String> softwareReqs, int hardwareReqs){
+    public Component(String identifier, List<String> softwareReqs, int hardwareReqs){
         this.identifier = identifier;
         this.softwareReqs = softwareReqs;
+        this.hardwareReqs = hardwareReqs;
     }
 
-    public ArrayList<String> getSoftwareRequirements() {
+    public List<String> getSoftwareRequirements() {
         return softwareReqs;
     }
 
@@ -33,6 +36,14 @@ public class Component {
 
     public String getId() {
         return this.identifier;
+    }
+    
+    @Override
+    public String toString(){
+        String result = "<";
+        result = result + this.identifier + " - Sigma: " + this.softwareReqs + " H: "+ Integer.toString(this.hardwareReqs);        
+        result += ">";
+        return result; 
     }
     
 }

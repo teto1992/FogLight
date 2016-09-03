@@ -8,7 +8,6 @@ package qfog.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import qfog.application.Application;
 import qfog.application.Component;
 import qfog.infrastructure.Infrastructure;
