@@ -16,5 +16,5 @@ public class Infrastructure {
     public HashSet<CloudDatacentre> C;
     public HashSet<FogNode> F;
     public HashSet<Thing> T;
-    public HashSet<Link> L;
+    public HashMap<Couple, Link> L;
 }

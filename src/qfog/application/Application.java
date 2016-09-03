@@ -7,11 +7,9 @@ package qfog.application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import qfog.utils.Couple;
 import qfog.utils.Link;
-import qfog.utils.Node;
 
 /**
  *

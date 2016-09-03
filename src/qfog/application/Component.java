@@ -5,11 +5,8 @@
  */
 package qfog.application;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import qfog.utils.Link;
+
 
 /**
  *
@@ -41,7 +38,7 @@ public class Component {
     @Override
     public String toString(){
         String result = "<";
-        result = result + this.identifier + " - Sigma: " + this.softwareReqs + " H: "+ Integer.toString(this.hardwareReqs);        
+        result = result + this.identifier + ", " + this.softwareReqs + ", "+ Integer.toString(this.hardwareReqs);        
         result += ">";
         return result; 
     }
