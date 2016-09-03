@@ -12,6 +12,10 @@ public class Coordinates {
         this.lat = lat;
         this.lng = lng;
     }
+
+    Coordinates() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public double distance (Coordinates coords){
         final int R = 6371; // Radius of the earth

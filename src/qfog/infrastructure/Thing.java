@@ -5,8 +5,6 @@
  */
 package qfog.infrastructure;
 
-import qfog.application.Component;
-import qfog.application.ThingRequest;
 import qfog.utils.Coordinates;
 
 /**
@@ -37,9 +35,5 @@ public class Thing {
     
     public void setCoordinates(Coordinates coords){
         this.coords = coords;
-    }
-
-    public boolean isCompatible(ThingRequest request) {
-        return request.getMaxDistance() < this.coords.distance(request.getCoordinates());
     }
 }
