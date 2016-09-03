@@ -44,4 +44,15 @@ public class FogNode extends Node{
                         (s) -> (!super.getSoftware().contains(s))
                 );
     }
+
+    @Override
+    public void deploy(Component s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void undeploy(Component s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

@@ -28,5 +28,14 @@ public class CloudDatacentre extends Node {
         return softwareRequirements.stream().noneMatch((s) 
                 -> (!super.getSoftware().contains(s)));
     }
+
+    @Override
+    public void deploy(Component s) {
+    }
+
+    @Override
+    public void undeploy(Component s) {
+        
+    }
     
 }

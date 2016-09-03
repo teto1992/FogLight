@@ -10,5 +10,11 @@ package qfog.utils;
  * @author stefano
  */
 public class Link {
+    Node a, b;
+    QoSProfile q;
+    int latency;
+    double Bdown;
+    double Bup;
+    
     
 }

@@ -16,7 +16,7 @@ import qfog.utils.Node;
  * @author stefano
  */
 public class Application {
-    public HashSet<Component> S;
+    public ArrayList<Component> S;
     public HashSet<Link> L;
     public HashMap<String, ArrayList<Node>> delta;
     
