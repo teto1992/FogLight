@@ -5,7 +5,9 @@
  */
 package qfog.infrastructure;
 
+import qfog.application.Component;
 import qfog.utils.Coordinates;
+import qfog.utils.Node;
 
 /**
  *
@@ -36,4 +38,5 @@ public class Thing {
     public void setCoordinates(Coordinates coords){
         this.coords = coords;
     }
+
 }

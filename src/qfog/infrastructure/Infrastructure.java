@@ -7,7 +7,6 @@ package qfog.infrastructure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import qfog.utils.Couple;
 import qfog.utils.Link;
@@ -41,5 +40,14 @@ public class Infrastructure {
         T.add(new Thing(identifier, type, x, y));
     }
     
+    public void addLink(String a, String b, int latency, double bandwidth) {
+        L.put(new Couple(a,b), new Link(a,b,latency,bandwidth));
+        L.put(new Couple(b,a), new Link(b,a,latency,bandwidth));
+    }
+
+    public void addLink(String a, String b, int latency, double bandwidthba, double bandwidthab) {
+        L.put(new Couple(a,b), new Link(a,b,latency,bandwidthab));
+        L.put(new Couple(b,a), new Link(b,a,latency,bandwidthba));
+    }
     
 }
