@@ -12,30 +12,20 @@ public class Coordinates {
         this.lat = lat;
         this.lng = lng;
     }
-
-    Coordinates() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public double distance (Coordinates coords){
         final int R = 6371; // Radius of the earth
-        
         double lat1 = this.lat;
         double lat2 = coords.getLatitude();
         double lon1 = this.lng;
         double lon2 = coords.getLongitude();
-        
-        Double latDistance = Math.toRadians(lat1- lat2);
-        Double lonDistance = Math.toRadians(lon1 - lon2);
-        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c * 1000; // convert to meters
-
-        distance = Math.pow(distance, 2);
-
-        return Math.sqrt(distance);
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+        double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return R * c;
     }
 
     private double getLatitude() {

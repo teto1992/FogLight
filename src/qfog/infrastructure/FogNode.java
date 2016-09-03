@@ -42,6 +42,7 @@ public class FogNode extends Node{
                         (s) -> (!super.getSoftware().contains(s))
                 );
     }
+   
 
     @Override
     public void deploy(Component s) {
