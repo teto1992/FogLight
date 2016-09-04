@@ -5,6 +5,7 @@
  */
 package qfog.utils;
 
+import qfog.deployment.Search;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class QFog {
         Phi.addThing("fire0", "fire", 43.7381285,10.4552213, "local_2");
         Phi.addThing("floodgates0", "floodgates", 43.7381285,10.4552213, "local_2");
         
-        ExhaustiveSearch search = new ExhaustiveSearch(A, Phi);
+        Search search = new Search(A, Phi);
         search.findCompatibleNodes();
         
         System.out.println(search.search());

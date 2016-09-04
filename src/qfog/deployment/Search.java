@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.utils;
+package qfog.deployment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +11,9 @@ import java.util.HashSet;
 import qfog.application.Application;
 import qfog.application.Component;
 import qfog.infrastructure.Infrastructure;
+import qfog.utils.Node;
 
-public class ExhaustiveSearch {
+public class Search {
 
     Application A;
     Infrastructure Phi;
@@ -20,7 +21,7 @@ public class ExhaustiveSearch {
     HashMap<String, ArrayList<Node>> K;
     HashMap<Component, Node> open;
 
-    public ExhaustiveSearch(Application A, Infrastructure Phi) {
+    public Search(Application A, Infrastructure Phi) {
         this.A = A;
         this.Phi = Phi;
         deployments = new HashSet<>();
@@ -28,7 +29,7 @@ public class ExhaustiveSearch {
         open = new HashMap<>();
     }
 
-    ExhaustiveSearch() {
+    Search() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
