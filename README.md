@@ -1,3 +1,2 @@
-# QFog
-QoS-Aware Deployment Through the Fog
-An implementation.
+# Fog-SQuAD 
+A tool for Systemic Qualities (QoS) Aware Deployment over the Fog.
