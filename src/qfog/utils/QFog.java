@@ -51,7 +51,30 @@ public class QFog {
         Phi.addFogNode("local_1", asList("a","b"), 2, 43.7464449,10.4615923);
         Phi.addFogNode("local_2", asList("a","b"), 4, 43.7381285,10.4552213);
         
-        System.out.println(Phi.F.get(1).distance(Phi.C.get(1)));
+        Phi.addThing("water0", "water", 43.7464449, 10.4615923, "local_1");
+        Phi.addThing("moisture0", "moisture", 43.7464449,10.4615923, "local_1");
+        Phi.addThing("UV0", "UV", 43.7464449,10.4615923, "local_1");
+        Phi.addThing("camera0", "video", 43.7464449,10.4615923, "local_1");
+        Phi.addThing("salts0", "salts", 43.7464449,10.4615923, "local_1");
+        
+        Phi.addThing("wind0", "wind", 43.740186, 10.364619, "consortium_1");
+        Phi.addThing("pressure0", "pressure", 43.740186, 10.364619, "consortium_1");
+        Phi.addThing("temperature0", "temperature", 43.740186, 10.364619, "consortium_1");
+        
+        Phi.addThing("water1", "water", 43.7381285,10.4552213, "local_2");
+        Phi.addThing("fertiliser0", "fertiliser", 43.7381285,10.4552213, "local_2");
+        Phi.addThing("extinguisher0", "extinguisher", 43.7381285,10.4552213, "local_2");
+        Phi.addThing("flood0", "flood", 43.7381285,10.4552213, "local_2");
+        Phi.addThing("fire0", "fire", 43.7381285,10.4552213, "local_2");
+        Phi.addThing("floodgates0", "floodgates", 43.7381285,10.4552213, "local_2");
+        
+        ExhaustiveSearch search = new ExhaustiveSearch(A, Phi);
+        search.findCompatibleNodes();
+        
+        System.out.println(search.search());
+
+        System.out.println(Phi);
+        
     }
     
 }

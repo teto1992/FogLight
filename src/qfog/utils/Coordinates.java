@@ -35,4 +35,8 @@ public class Coordinates {
     private double getLongitude() {
         return this.lng;
     }
+    
+    public String toString(){
+        return "("+ this.lat + ", " + this.lng + ")";
+    }
 }

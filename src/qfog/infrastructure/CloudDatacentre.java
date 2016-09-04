@@ -37,4 +37,12 @@ public class CloudDatacentre extends Node {
     public void undeploy(Component s) {
     }
     
+    @Override
+    public String toString(){
+        String result = "<";
+        result = result + getId() + ", " + this.getSoftware()+ ", "+ this.getCoordinates();        
+        result += ">";
+        return result; 
+    }
+    
 }

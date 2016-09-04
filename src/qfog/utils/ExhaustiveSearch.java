@@ -28,9 +28,13 @@ public class ExhaustiveSearch {
         open = new HashMap<>();
     }
 
+    ExhaustiveSearch() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void findCompatibleNodes() {
 
-        for (Node n : Phi.C) {
+        for (Node n : Phi.C.values()) {
             A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
                 if (!K.containsKey(s.getId())) {
                     K.put(s.getId(), new ArrayList<>());
@@ -40,7 +44,7 @@ public class ExhaustiveSearch {
                 K.get(s.getId()).add(n);
             });
         }
-        for (Node n : Phi.F) {
+        for (Node n : Phi.F.values()) {
             A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
                 if (!K.containsKey(s.getId())) {
                     K.put(s.getId(), new ArrayList<>());

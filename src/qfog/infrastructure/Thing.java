@@ -38,5 +38,13 @@ public class Thing {
     public void setCoordinates(Coordinates coords){
         this.coords = coords;
     }
+    
+        @Override
+    public String toString(){
+        String result = "<";
+        result = result + this.identifier + ", " + this.type + ", "+ this.getCoordinates();        
+        result += ">";
+        return result; 
+    }
 
 }

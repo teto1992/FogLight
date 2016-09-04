@@ -54,4 +54,12 @@ public class FogNode extends Node{
         this.setHardware(this.getHardware()+s.getHardwareRequirements());
     }
     
+        @Override
+    public String toString(){
+        String result = "<";
+        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware) +", "+this.getCoordinates();        
+        result += ">";
+        return result; 
+    }
+    
 }
