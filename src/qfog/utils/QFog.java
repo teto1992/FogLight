@@ -82,14 +82,14 @@ public class QFog {
         
         Search search = new Search(A, Phi);
         search.findCompatibleNodes();
-        HashMap<Component, Node> m = search.search();
+        boolean m = search.search();
         
-        if(m != null)
+        if(m)
             System.out.println(m);
         else 
             System.out.println("failure");
 
-        System.out.println(Phi);
+        System.out.println("End"+Phi);
         
     }
     
