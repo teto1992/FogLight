@@ -84,12 +84,14 @@ public class QFog {
         search.findCompatibleNodes();
         boolean m = search.search();
         
-        if(m)
+        if(m){
             System.out.println(m);
+            System.out.println(search.deployment);
+        }
         else 
             System.out.println("failure");
 
-        System.out.println("End"+Phi);
+        System.out.println("End ... "+ Phi);
         
     }
     

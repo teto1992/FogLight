@@ -36,4 +36,11 @@ public class QoSProfile {
     public String toString(){
         return "<" + latency + ", " + bandwidth + ">";
     }
+    
+    public boolean supports(QoSProfile q){
+        boolean result = false;
+        if (this.latency <= q.getLatency() && this.bandwidth >= q.getBandwidth())
+            result = true;
+        return result;
+    }
 }
