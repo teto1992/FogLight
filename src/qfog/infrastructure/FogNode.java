@@ -5,6 +5,7 @@
  */
 package qfog.infrastructure;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import qfog.application.Component;
 import qfog.utils.Node;
@@ -16,12 +17,22 @@ import qfog.utils.Node;
 public class FogNode extends Node{
 
     private int hardware;
-
+    private ArrayList<Thing> reachableThings;
+    
     public FogNode(String identifier, int hardware, Collection<String> software, double x, double y){
         super.setId(identifier);
         setHardware(hardware);
         super.setSoftware(software);
         super.setCoordinates(x,y);
+        reachableThings = new ArrayList<>();
+    }
+    
+    public boolean addThing(Thing t){
+        return reachableThings.add(t);
+    }
+    
+    public boolean removeThing(Thing t){
+        return reachableThings.remove(t);
     }
 
     public void setHardware(int hardware){

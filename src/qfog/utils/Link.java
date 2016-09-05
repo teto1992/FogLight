@@ -22,7 +22,7 @@ public class Link {
      */
     public Link (String a, String b, int latency, double bandwidth){
         link = new Couple(a,b);
-        this.q = new QoSProfile(latency, bandwidth);
+        q = new QoSProfile(latency, bandwidth);
     }
     
     public String toString(){
@@ -31,5 +31,8 @@ public class Link {
                 ", " + this.q + ")";
     }
    
+    public QoSProfile getQ(){
+        return q;
+    }
         
 }

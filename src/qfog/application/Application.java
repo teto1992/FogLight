@@ -19,6 +19,7 @@ public class Application {
     public ArrayList<Component> S;
     public HashMap<Couple, Link> L;
     
+    
     public Application(){
         S = new ArrayList<>();
         L = new HashMap<>();

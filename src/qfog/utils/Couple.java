@@ -5,6 +5,8 @@
  */
 package qfog.utils;
 
+import java.util.Objects;
+
 /**
  *
  * @author stefano
@@ -35,5 +37,26 @@ public class Couple {
     
     public boolean equals(String x, String y){
         return x.equals(a) && y.equals(b);
+    }
+    
+    @Override
+    public boolean equals(Object c){
+        if (c.getClass() == Couple.class){
+            Couple k = (Couple)c;
+            return this.a.equals(k.getA()) && this.b.equals(k.getB());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.a);
+        hash = 97 * hash + Objects.hashCode(this.b);
+        return hash;
+    }
+    
+    public String toString(){
+        return "(" + a + ", "+ b +")";
     }
 }

@@ -5,10 +5,8 @@
  */
 package qfog.infrastructure;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import qfog.application.Component;
 import qfog.utils.Couple;
 import qfog.utils.Link;
 import qfog.utils.Node;
@@ -44,7 +42,7 @@ public class Infrastructure {
         T.put(identifier, new Thing(identifier, type, x, y));
         L.put(new Couple(identifier, fogNode), new Link(identifier, fogNode, 0, Double.MAX_VALUE));
         L.put(new Couple(fogNode, identifier), new Link(fogNode, identifier, 0, Double.MAX_VALUE));
-        
+        F.get(fogNode);
     }
     
     public void addLink(String a, String b, int latency, double bandwidth) {
