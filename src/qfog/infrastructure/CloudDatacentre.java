@@ -5,8 +5,8 @@
  */
 package qfog.infrastructure;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import qfog.application.Component;
 import qfog.utils.Node;
 
@@ -24,9 +24,25 @@ public class CloudDatacentre extends Node {
 
     @Override
     public boolean isCompatible(Component component) {
-        ArrayList<String> softwareRequirements = component.getSoftwareRequirements();
+        List<String> softwareRequirements = component.getSoftwareRequirements();
         return softwareRequirements.stream().noneMatch((s) 
                 -> (!super.getSoftware().contains(s)));
+    }
+
+    @Override
+    public void deploy(Component s) {
+    }
+
+    @Override
+    public void undeploy(Component s) {
+    }
+    
+    @Override
+    public String toString(){
+        String result = "<";
+        result = result + getId() + ", " + this.getSoftware()+ ", "+ this.getCoordinates();        
+        result += ">";
+        return result; 
     }
     
 }

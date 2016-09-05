@@ -5,10 +5,8 @@
  */
 package qfog.infrastructure;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import qfog.application.Component;
-import qfog.utils.Coordinates;
 import qfog.utils.Node;
 
 /**
@@ -44,4 +42,24 @@ public class FogNode extends Node{
                         (s) -> (!super.getSoftware().contains(s))
                 );
     }
+   
+
+    @Override
+    public void deploy(Component s) {
+        this.setHardware(this.getHardware()-s.getHardwareRequirements());
+    }
+
+    @Override
+    public void undeploy(Component s) {
+        this.setHardware(this.getHardware()+s.getHardwareRequirements());
+    }
+    
+        @Override
+    public String toString(){
+        String result = "<";
+        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware) +", "+this.getCoordinates();        
+        result += ">";
+        return result; 
+    }
+    
 }

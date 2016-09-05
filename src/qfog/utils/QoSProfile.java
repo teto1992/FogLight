@@ -32,4 +32,8 @@ public class QoSProfile {
     public double getBandwidth(){
         return this.bandwidth;
     }
+    
+    public String toString(){
+        return "<" + latency + ", " + bandwidth + ">";
+    }
 }

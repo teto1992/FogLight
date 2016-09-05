@@ -42,6 +42,15 @@ public abstract class Node {
         return this.coords;
     }
     
+    public double distance(Node n){
+        return getCoordinates().distance(n.getCoordinates());
+    }
+    
     public abstract boolean isCompatible(Component component);
+
+    public abstract void deploy(Component s);
+     
+    public abstract void undeploy(Component s);
+
     
 }
