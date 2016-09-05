@@ -5,9 +5,8 @@
  */
 package qfog.infrastructure;
 
-import qfog.application.Component;
 import qfog.utils.Coordinates;
-import qfog.utils.Node;
+
 
 /**
  *

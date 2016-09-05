@@ -118,10 +118,10 @@ public class Search {
             Couple couple2 = new Couple(s.getId(), c.getId());
 
             if (A.L.containsKey(couple1) && A.L.containsKey(couple2)) {
-                Link al1 = A.L.get(couple1);
-                Link al2 = A.L.get(couple2);
-                Couple c1 = new Couple(n.getId(), m.getId());
-                Couple c2 = new Couple(m.getId(), n.getId());
+                Link al1 = A.L.get(couple1); //c,s
+                Link al2 = A.L.get(couple2); //s,c
+                Couple c1 = new Couple(m.getId(), n.getId()); // m,n
+                Couple c2 = new Couple(n.getId(), m.getId()); // n,m
                 if (Phi.L.containsKey(c1)) {
                     Link pl1 = Phi.L.get(c1);
                     Link pl2 = Phi.L.get(c2);
@@ -130,7 +130,6 @@ public class Search {
                     pl2.getQ().setBandwidth(pl2.getQ().getBandwidth() - al2.getQ().getBandwidth());
                 }
             }
-
         }
     }
 
