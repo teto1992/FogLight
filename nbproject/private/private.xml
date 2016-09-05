@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/application/ThingRequest.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/infrastructure/FogNode.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/Link.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/application/Application.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/Coordinates.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/ExhaustiveSearch.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/QFog.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/QoSProfile.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/Node.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/GreedySearch.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/infrastructure/Infrastructure.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/infrastructure/Thing.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/application/Component.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/infrastructure/CloudDatacentre.java</file>
-            <file>file:/C:/Users/stefa/Documents/NetBeansProjects/QFog/src/qfog/utils/Couple.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
