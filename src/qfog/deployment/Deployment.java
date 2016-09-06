@@ -24,4 +24,14 @@ public class Deployment extends HashMap<Component, Node> {
         businessPolicies = new HashMap<String, HashSet<String>>();
         thingRequirements = new HashMap<String, ArrayList<ThingRequirement>>();     
     }
+    
+    @Override
+    public String toString(){
+        String result ="Delta:\n";
+        for (Component s : super.keySet()){
+            result+="\t["+s.getId()+", " +super.get(s).getId()+"]\n";
+        }
+        return result;   
+    }
+
 }
