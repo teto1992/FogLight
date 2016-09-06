@@ -6,13 +6,11 @@
 package qfog.utils;
 
 import qfog.deployment.Search;
-import java.util.ArrayList;
 import static java.util.Arrays.asList;
-import java.util.List;
-import java.lang.String;
 import java.util.HashMap;
 import qfog.application.Application;
 import qfog.application.Component;
+import qfog.deployment.Deployment;
 import qfog.infrastructure.Infrastructure;
 
 /**
@@ -80,19 +78,20 @@ public class QFog {
         Phi.addLink("consortium_1", "cloud_1", 35, 60, 18);
         Phi.addLink("consortium_1", "cloud_2", 45, 65, 18);
         
-        Search search = new Search(A, Phi);
-        search.findCompatibleNodes();
-        boolean m = search.search();
+        Deployment d = new Deployment();
         
-        if(m){
+        Search search = new Search(A, Phi, d);
+
+        HashMap<Component, Node> m = search.findDeployment();
+        
+        if(m != null){
             System.out.println(m);
-            System.out.println(search.deployment);
         }
         else 
             System.out.println("failure");
-
-        System.out.println("End ... "+ Phi);
         
+        System.out.println(Phi);
+
     }
     
 }

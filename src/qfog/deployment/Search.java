@@ -17,21 +17,18 @@ import qfog.utils.QoSProfile;
 
 public class Search {
 
-    Application A;
-    Infrastructure Phi;
-    HashMap<String, ArrayList<Node>> K;
-    public HashMap<Component, Node> deployment;
-    int searchcalls;
+    private Application A;
+    private Infrastructure Phi;
+    private HashMap<String, ArrayList<Node>> K;
+    int steps;
 
-    public Search(Application A, Infrastructure Phi) {
+    public Search(Application A, Infrastructure Phi, Deployment d) {
         this.A = A;
         this.Phi = Phi;
         K = new HashMap<>();
-        deployment = new HashMap<>();
     }
 
-    public void findCompatibleNodes() {
-
+    private void findCompatibleNodes() {
         for (Node n : Phi.C.values()) {
             A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
                 if (!K.containsKey(s.getId())) {
@@ -54,43 +51,36 @@ public class Search {
         }
     }
 
-    public boolean search() {
-        searchcalls++;
-        //if assignement is complete
-        if (deployment.size() == A.S.size()) {
-            System.out.println(searchcalls);
-            return true;
+    public Deployment findDeployment(){
+        Deployment deployment = new Deployment();
+        findCompatibleNodes();
+        deployment = search(deployment);
+        return deployment;
+    }
+    private  Deployment  search(Deployment deployment) {
+        steps++;
+        if (isComplete(deployment)){
+            return deployment;
         }
-        //select unassigned component s
-        Component s = A.S.get(deployment.size());
-
-        //for each node in the domain of s
+        Component s = selectUndeployedComponent(deployment);
         for (Node n : K.get(s.getId())) { // for all nodes compatible with s
-            // if node is consistent with assignment
-            if (n.isCompatible(s) && checkLinks(s, n)) {
-                // add {s = n} to deployment
-                deployment.put(s, n);
-                //inferences
-                n.deploy(s);
-                deployLinks(s, n);
-                K = new HashMap<>();
-                this.findCompatibleNodes();
-                //recursive call
-                boolean result = search();
-                if (result) {
-                    return true;
+            if (isValid(deployment, s, n)) {
+                System.out.println(steps+" Deploying "+ s + " onto node " + n);
+                deploy(deployment, s, n);
+                HashMap<Component, Node>  result = search(deployment);
+                if (result != null) {
+                    return deployment;
                 }
             }
             if (deployment.containsKey(s)) {
-                deployment.remove(s);
-                n.undeploy(s);
-                undeployLinks(s, n);
+                System.out.println(steps+" Undeploying "+ s + " from node " + n);
+                undeploy(deployment, s, n);
             }
         }
-        return false;
+        return null;
     }
 
-    private boolean checkLinks(Component s, Node n) {
+    private boolean checkLinks(Deployment deployment, Component s, Node n) {
         
         for (Component c : deployment.keySet()) {
             Node m = deployment.get(c); // nodo deployment c
@@ -116,7 +106,7 @@ public class Search {
         return true;
     }
 
-    private void deployLinks(Component s, Node n) {
+    private void deployLinks(Deployment deployment, Component s, Node n) {
         for (Component c : deployment.keySet()) {
             Node m = deployment.get(c);
             Couple couple1 = new Couple(c.getId(), s.getId());
@@ -138,7 +128,7 @@ public class Search {
         }
     }
 
-    private void undeployLinks(Component s, Node n) {
+    private void undeployLinks(Deployment deployment, Component s, Node n) {
         for (Component c : deployment.keySet()) {
             Node m = deployment.get(c);
             Couple couple1 = new Couple(c.getId(), s.getId());
@@ -160,5 +150,30 @@ public class Search {
 
         }
     }
+
+    private boolean isValid(Deployment deployment, Component s, Node n) {
+        return n.isCompatible(s) && checkLinks(deployment, s, n);
+    }
+
+    private void deploy(Deployment deployment, Component s, Node n) {
+                deployment.put(s, n);
+                n.deploy(s);
+                deployLinks(deployment, s, n);
+    }
+    
+    private void undeploy(Deployment deployment, Component s, Node n) {
+                deployment.remove(s);
+                n.undeploy(s);
+                undeployLinks(deployment, s, n);
+    }
+
+    private Component selectUndeployedComponent(Deployment deployment) {
+        return A.S.get(deployment.size());    
+    }
+
+    private boolean isComplete(Deployment deployment) {
+        return deployment.size() == A.S.size();
+    }
+
 
 }
