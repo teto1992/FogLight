@@ -51,6 +51,5 @@ public abstract class Node {
     public abstract void deploy(Component s);
      
     public abstract void undeploy(Component s);
-
-    
+        
 }

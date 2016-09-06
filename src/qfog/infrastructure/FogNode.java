@@ -18,6 +18,7 @@ public class FogNode extends Node{
 
     private int hardware;
     private ArrayList<Thing> reachableThings;
+    private ArrayList<Thing> connectedThings;
     
     public FogNode(String identifier, int hardware, Collection<String> software, double x, double y){
         super.setId(identifier);
@@ -25,6 +26,7 @@ public class FogNode extends Node{
         super.setSoftware(software);
         super.setCoordinates(x,y);
         reachableThings = new ArrayList<>();
+        connectedThings = new ArrayList<>();
     }
     
     public boolean addThing(Thing t){

@@ -21,6 +21,7 @@ public class Search {
     Infrastructure Phi;
     HashMap<String, ArrayList<Node>> K;
     public HashMap<Component, Node> deployment;
+    int searchcalls;
 
     public Search(Application A, Infrastructure Phi) {
         this.A = A;
@@ -54,8 +55,10 @@ public class Search {
     }
 
     public boolean search() {
+        searchcalls++;
         //if assignement is complete
         if (deployment.size() == A.S.size()) {
+            System.out.println(searchcalls);
             return true;
         }
         //select unassigned component s
@@ -70,6 +73,8 @@ public class Search {
                 //inferences
                 n.deploy(s);
                 deployLinks(s, n);
+                K = new HashMap<>();
+                this.findCompatibleNodes();
                 //recursive call
                 boolean result = search();
                 if (result) {
