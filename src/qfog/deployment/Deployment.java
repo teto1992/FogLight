@@ -24,6 +24,10 @@ public class Deployment extends HashMap<Component, Node> {
         businessPolicies = new HashMap<String, HashSet<String>>();
         thingRequirements = new HashMap<String, ArrayList<ThingRequirement>>();     
     }
+
+    Deployment(Deployment deployment) {
+        super(deployment);
+    }
     
     @Override
     public String toString(){

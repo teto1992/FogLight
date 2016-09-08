@@ -90,7 +90,7 @@ public class QFog {
         else 
             System.out.println("failure");
         
-        System.out.println(Phi);
+        System.out.println(search.D);
 
     }
     
