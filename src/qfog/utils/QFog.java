@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import qfog.deployment.Search;
 import static java.util.Arrays.asList;
 import java.util.HashMap;
+import qfog.application.AnyThing;
 import qfog.application.Application;
 import qfog.application.Component;
+import qfog.application.ExactThing;
 import qfog.application.ThingsRequirement;
 import qfog.deployment.Deployment;
 import qfog.infrastructure.Infrastructure;
@@ -32,18 +34,19 @@ public class QFog {
         QoSProfile q = new QoSProfile(30,0.0);
         QoSProfile q2 = new QoSProfile(0,0.0);
         
-        irrigation.add(new ThingsRequirement("videocamera", q));
-        irrigation.add(new ThingsRequirement("water", q, 2));
-        irrigation.add(new ThingsRequirement("fertiliser", q));
-        irrigation.add(new ThingsRequirement("temperature", q));
-        irrigation.add(new ThingsRequirement("UV", q));
-        irrigation.add(new ThingsRequirement("salts", q));
-        irrigation.add(new ThingsRequirement("moisture", q));
+        irrigation.add(new ExactThing("videocamera0", q));
+        irrigation.add(new ExactThing("water0", q));
+        irrigation.add(new ExactThing("water1", q));
+        irrigation.add(new ExactThing("fertiliser0", q));
+        irrigation.add(new AnyThing("temperature", 43.7464449, 10.4615923, 8.0));
+        irrigation.add(new ExactThing("UV0", q));
+        irrigation.add(new ExactThing("salts0", q));
+        irrigation.add(new ExactThing("moisture0", q));
         
-        fireflood.add(new ThingsRequirement("fire", q2));
-        fireflood.add(new ThingsRequirement("flood", q2)); 
-        fireflood.add(new ThingsRequirement("extinguisher", q2));
-        fireflood.add(new ThingsRequirement("floodgates", q2));
+        fireflood.add(new ExactThing("fire0", q2));
+        fireflood.add(new ExactThing("flood0", q2)); 
+        fireflood.add(new ExactThing("extinguisher0", q2));
+        fireflood.add(new ExactThing("floodgates0", q2));
         
         //components
         A.addComponent("insights", asList(".NETcore","mySQL"), 4);
@@ -68,8 +71,8 @@ public class QFog {
         Phi.addCloudDatacentre("cloud_1", asList("java", ".NETcore", "ruby","mySQL"), 52.195097,3.0364791 );
         Phi.addCloudDatacentre("cloud_2", asList("spark", "mySQL", "linux", "windows", "python", "c++"), 44.123896,-122.781555);
         Phi.addFogNode("consortium_1",asList("python", "c++", "mySQL", ".NETcore"), 10, 43.740186, 10.364619);
-        Phi.addFogNode("local_1", asList("c++","linux", "python", "e"), 2, 43.7464449,10.4615923);
-        Phi.addFogNode("local_2", asList("c++","linux", "python",  "e"), 4, 43.7381285,10.4552213);
+        Phi.addFogNode("local_1", asList("c++","linux", "python"), 2, 43.7464449,10.4615923);
+        Phi.addFogNode("local_2", asList("c++","linux", "python"), 4, 43.7381285,10.4552213);
         
         Phi.addLink("local_1", "local_2", 1, 100);
         Phi.addLink("local_1", "consortium_1", 5, 20);

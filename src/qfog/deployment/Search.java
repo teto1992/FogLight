@@ -7,8 +7,14 @@ package qfog.deployment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import qfog.application.AnyThing;
 import qfog.application.Application;
 import qfog.application.Component;
+import qfog.application.ExactThing;
+import qfog.application.ThingsRequirement;
+import qfog.infrastructure.CloudDatacentre;
+import qfog.infrastructure.FogNode;
 import qfog.infrastructure.Infrastructure;
 import qfog.utils.Couple;
 import qfog.utils.Link;
@@ -43,7 +49,7 @@ public class Search {
         }
         for (Node n : Phi.F.values()) {
             A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
-                if (!K.containsKey(s.getId())) {
+                if (checkThings(s,n) && !K.containsKey(s.getId())) {
                     K.put(s.getId(), new ArrayList<>());
                 }
                 return s;
@@ -200,6 +206,23 @@ public class Search {
 
     private boolean isComplete(Deployment deployment) {
         return deployment.size() == A.S.size();
+    }
+
+    private boolean checkThings(Component s, FogNode n) {
+        for (ThingsRequirement r : s.getThingsRequirements()){
+            if (r.getClass()==ExactThing.class){
+                if (!(n.isReachable(((ExactThing) r).getId()))){
+                    return false;
+                }
+            } else{
+                AnyThing a = (AnyThing) r;
+                for (String tmp : n.getReachableThings()){
+                    
+                }
+            }
+        }
+        return true;
+   
     }
 
 }

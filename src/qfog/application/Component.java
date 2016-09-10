@@ -45,5 +45,9 @@ public class Component {
         result += ">";
         return result; 
     }
+
+    public Iterable<ThingsRequirement> getThingsRequirements() {
+        return this.Theta;
+    }
     
 }

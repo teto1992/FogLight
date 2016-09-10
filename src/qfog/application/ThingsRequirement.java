@@ -11,36 +11,16 @@ import qfog.utils.QoSProfile;
  *
  * @author stefano
  */
-public class ThingsRequirement {
-    private String type;
-    private int number;
-    private QoSProfile q;
+public abstract class ThingsRequirement {
 
-    public ThingsRequirement(String type, QoSProfile q, int number) {
-        this.type = type;
-        this.number = number;
+    private QoSProfile q;
+    
+
+    public void setQ(QoSProfile q) {
         this.q = q;
     }
-    
-    public ThingsRequirement(String type, QoSProfile q) {
-        this.type = type;
-        this.number = 1;
-        this.q = q;
-    }
-    
-    public String getType(){
-        return type;
-    }
-    
-    public int getNumber(){
-        return number;
-    }
-    
-    public QoSProfile getQ(){
+
+    public QoSProfile getQ() {
         return q;
-    }
-    
-    public String toString(){
-        return "(" + type + ", "+q+", "+number +")";
     }
 }

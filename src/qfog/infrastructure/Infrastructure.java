@@ -12,7 +12,6 @@ import java.util.Set;
 import qfog.utils.Couple;
 import qfog.utils.Link;
 import qfog.utils.Node;
-import qfog.utils.QoSProfile;
 
 /**
  *
@@ -47,8 +46,6 @@ public class Infrastructure {
         FogNode f = F.get(fogNode);
         Set<Couple> s = new HashSet(L.keySet());
         for (Couple l: s){
-            System.out.println(l);
-
             if (l.getA().equals(fogNode)){
                 String fogNode2 = l.getB();
                 if(F.containsKey(fogNode2) && !fogNode2.equals(fogNode)){    
@@ -56,7 +53,6 @@ public class Infrastructure {
                     int lat = (int) r.getQ().getLatency();
                     double bw = r.getQ().getBandwidth();
                     L.put(new Couple(identifier, fogNode2), new Link(identifier, fogNode2, lat, bw ));
-                    System.out.println(fogNode + " " + fogNode2);
                     r = L.get(new Couple(fogNode2, fogNode));
                     lat = r.getQ().getLatency();
                     bw = r.getQ().getBandwidth();
@@ -67,7 +63,7 @@ public class Infrastructure {
         } 
         addLink(identifier, fogNode, 0, Double.MAX_VALUE);
         addLink(fogNode, identifier, 0, Double.MAX_VALUE);
-
+        f.addReachableThing(t.getId());
     }
     
     public void addLink(String a, String b, int latency, double bandwidth) {

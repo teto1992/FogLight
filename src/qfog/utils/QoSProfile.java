@@ -44,4 +44,5 @@ public class QoSProfile {
             result = true;
         return result;
     }
+
 }

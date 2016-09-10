@@ -5,14 +5,16 @@
  */
 package qfog.infrastructure;
 
+import qfog.application.Component;
 import qfog.utils.Coordinates;
+import qfog.utils.Node;
 
 
 /**
  *
  * @author stefano
  */
-public class Thing {
+public class Thing extends Node {
     private final String identifier, type;
     private Coordinates coords;
     
@@ -38,12 +40,25 @@ public class Thing {
         this.coords = coords;
     }
     
-        @Override
+    @Override
     public String toString(){
         String result = "<";
         result = result + this.identifier + ", " + this.type + ", "+ this.getCoordinates();        
         result += ">";
         return result; 
+    }
+
+    @Override
+    public boolean isCompatible(Component component) {
+        return true;
+    }
+
+    @Override
+    public void deploy(Component s) {
+     }
+
+    @Override
+    public void undeploy(Component s) {
     }
 
 }
