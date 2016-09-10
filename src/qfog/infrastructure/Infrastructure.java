@@ -39,10 +39,14 @@ public class Infrastructure {
     }
     
     public void addThing(String identifier, String type, double x, double y, String fogNode) {
-        T.put(identifier, new Thing(identifier, type, x, y));
-        L.put(new Couple(identifier, fogNode), new Link(identifier, fogNode, 0, Double.MAX_VALUE));
-        L.put(new Couple(fogNode, identifier), new Link(fogNode, identifier, 0, Double.MAX_VALUE));
-        F.get(fogNode);
+        T.put(identifier, new Thing(identifier, type, x, y) );
+        F.get(fogNode).addThing(T.get(identifier)); 
+        for(Link l: L.values()){
+            if (l.getCouple().getA().equals(fogNode) && F.containsKey(l.getCouple().getB())){
+                F.get(l.getCouple().getB()).addReachableThing(T.get(identifier), l.getQ());
+            } 
+        }
+
     }
     
     public void addLink(String a, String b, int latency, double bandwidth) {

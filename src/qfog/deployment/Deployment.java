@@ -5,7 +5,6 @@
  */
 package qfog.deployment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import qfog.application.Component;
@@ -17,12 +16,10 @@ import qfog.utils.Node;
  */
 public class Deployment extends HashMap<Component, Node> {
     HashMap<String, HashSet<String>> businessPolicies;
-    HashMap<String, ArrayList<ThingRequirement>> thingRequirements;
     
     public Deployment(){
         super();
-        businessPolicies = new HashMap<String, HashSet<String>>();
-        thingRequirements = new HashMap<String, ArrayList<ThingRequirement>>();     
+        businessPolicies = new HashMap<String, HashSet<String>>();   
     }
 
     Deployment(Deployment deployment) {

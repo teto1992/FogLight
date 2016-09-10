@@ -19,7 +19,6 @@ public class Application {
     public ArrayList<Component> S;
     public HashMap<Couple, Link> L;
     
-    
     public Application(){
         S = new ArrayList<>();
         L = new HashMap<>();
@@ -35,8 +34,12 @@ public class Application {
         L.put(new Couple(b,a), new Link(b,a,latency,bandwidthba));
     }
 
+    public void addComponent(String id, List<String> softwareReqs, int hardwareReqs, ArrayList<ThingsRequirement> Theta) {
+        S.add(new Component(id, softwareReqs, hardwareReqs, Theta));   
+    }
+    
     public void addComponent(String id, List<String> softwareReqs, int hardwareReqs) {
-        S.add(new Component(id, softwareReqs, hardwareReqs));   
+        S.add(new Component(id, softwareReqs, hardwareReqs, new ArrayList<>()));   
     }
     
     @Override
@@ -49,7 +52,6 @@ public class Application {
         }
         
         result+="}\n\nLambda = {\n";
-        
         
         for (Link l : L.values()){
             result+="\t"+l;

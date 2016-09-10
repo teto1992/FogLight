@@ -5,11 +5,13 @@
  */
 package qfog.utils;
 
+import java.util.ArrayList;
 import qfog.deployment.Search;
 import static java.util.Arrays.asList;
 import java.util.HashMap;
 import qfog.application.Application;
 import qfog.application.Component;
+import qfog.application.ThingsRequirement;
 import qfog.deployment.Deployment;
 import qfog.infrastructure.Infrastructure;
 
@@ -25,13 +27,31 @@ public class QFog {
     public static void main(String[] args) {
         
         Application A = new Application();
+        ArrayList<ThingsRequirement> irrigation = new ArrayList<>();
+        ArrayList<ThingsRequirement> fireflood = new ArrayList<>();
+        QoSProfile q = new QoSProfile(30,0.0);
+        QoSProfile q2 = new QoSProfile(0,0.0);
+        
+        irrigation.add(new ThingsRequirement("videocamera", q));
+        irrigation.add(new ThingsRequirement("water", q, 2));
+        irrigation.add(new ThingsRequirement("fertiliser", q));
+        irrigation.add(new ThingsRequirement("temperature", q));
+        irrigation.add(new ThingsRequirement("UV", q));
+        irrigation.add(new ThingsRequirement("salts", q));
+        irrigation.add(new ThingsRequirement("moisture", q));
+        
+        fireflood.add(new ThingsRequirement("fire", q2));
+        fireflood.add(new ThingsRequirement("flood", q2)); 
+        fireflood.add(new ThingsRequirement("extinguisher", q2));
+        fireflood.add(new ThingsRequirement("floodgates", q2));
+        
         //components
         A.addComponent("insights", asList(".NETcore","mySQL"), 4);
         A.addComponent("mlengine", asList("spark", "mySQL"), 8);
         A.addComponent("irrigation", asList("python", "c++", "mySQL"), 2);
         A.addComponent("fireflood", asList("python", "c++"), 1);
-        A.addComponent("irrigationGW", asList("c++","linux", "e"), 1);
-        A.addComponent("firefloodGW", asList("c++","linux", "e"), 1);
+        A.addComponent("irrigationGW", asList("c++","linux", "e"), 1, irrigation);
+        A.addComponent("firefloodGW", asList("c++","linux", "e"), 1, fireflood);
         //links
         A.addLink("insights", "mlengine", 60 , 2);
         A.addLink("insights", "fireflood", 15 , 1);
@@ -51,10 +71,20 @@ public class QFog {
         Phi.addFogNode("local_1", asList("c++","linux", "python", "e"), 2, 43.7464449,10.4615923);
         Phi.addFogNode("local_2", asList("c++","linux", "python",  "e"), 4, 43.7381285,10.4552213);
         
+        Phi.addLink("local_1", "local_2", 1, 100);
+        Phi.addLink("local_1", "consortium_1", 5, 20);
+        Phi.addLink("local_2", "consortium_1", 5, 20);
+        Phi.addLink("local_1", "cloud_1", 130, 8, 6);
+        Phi.addLink("local_1", "cloud_2", 200, 12, 10);
+        Phi.addLink("local_2", "cloud_1", 100, 12, 8);
+        Phi.addLink("local_2", "cloud_2", 180, 15, 11);
+        Phi.addLink("consortium_1", "cloud_1", 35, 60, 18);
+        Phi.addLink("consortium_1", "cloud_2", 45, 65, 18);
+        
         Phi.addThing("water0", "water", 43.7464449, 10.4615923, "local_1");
         Phi.addThing("moisture0", "moisture", 43.7464449,10.4615923, "local_1");
         Phi.addThing("UV0", "UV", 43.7464449,10.4615923, "local_1");
-        Phi.addThing("camera0", "video", 43.7464449,10.4615923, "local_1");
+        Phi.addThing("videocamera0", "videocamera", 43.7464449,10.4615923, "local_1");
         Phi.addThing("salts0", "salts", 43.7464449,10.4615923, "local_1");
         
         Phi.addThing("wind0", "wind", 43.740186, 10.364619, "consortium_1");
@@ -67,17 +97,7 @@ public class QFog {
         Phi.addThing("flood0", "flood", 43.7381285,10.4552213, "local_2");
         Phi.addThing("fire0", "fire", 43.7381285,10.4552213, "local_2");
         Phi.addThing("floodgates0", "floodgates", 43.7381285,10.4552213, "local_2");
-        
-        Phi.addLink("local_1", "local_2", 5, 20);
-        Phi.addLink("local_1", "consortium_1", 5, 20);
-        Phi.addLink("local_2", "consortium_1", 5, 20);
-        Phi.addLink("local_1", "cloud_1", 130, 8, 6);
-        Phi.addLink("local_1", "cloud_2", 200, 12, 10);
-        Phi.addLink("local_2", "cloud_1", 100, 12, 8);
-        Phi.addLink("local_2", "cloud_2", 180, 15, 11);
-        Phi.addLink("consortium_1", "cloud_1", 35, 60, 18);
-        Phi.addLink("consortium_1", "cloud_2", 45, 65, 18);
-        
+ 
         Deployment d = new Deployment();
         
         Search search = new Search(A, Phi, d);

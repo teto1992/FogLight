@@ -34,5 +34,9 @@ public class Link {
     public QoSProfile getQ(){
         return q;
     }
+    
+    public Couple getCouple(){
+        return this.link;
+    }
         
 }

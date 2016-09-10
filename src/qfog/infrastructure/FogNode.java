@@ -7,34 +7,40 @@ package qfog.infrastructure;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import qfog.application.Component;
 import qfog.utils.Node;
+import qfog.utils.QoSProfile;
 
 /**
  *
  * @author stefano
  */
 public class FogNode extends Node{
-
     private int hardware;
-    private ArrayList<Thing> reachableThings;
-    private ArrayList<Thing> connectedThings;
+    private HashMap<Thing, QoSProfile> reachableThings;
+    private HashSet<Thing> connectedThings;
     
     public FogNode(String identifier, int hardware, Collection<String> software, double x, double y){
         super.setId(identifier);
         setHardware(hardware);
         super.setSoftware(software);
         super.setCoordinates(x,y);
-        reachableThings = new ArrayList<>();
-        connectedThings = new ArrayList<>();
+        reachableThings = new HashMap<>();
+        connectedThings = new HashSet<>();
     }
     
     public boolean addThing(Thing t){
-        return reachableThings.add(t);
+        return connectedThings.add(t);
+    }
+    
+    public void addReachableThing(Thing t, QoSProfile q) {
+        reachableThings.put(t, q);
     }
     
     public boolean removeThing(Thing t){
-        return reachableThings.remove(t);
+        return connectedThings.remove(t);
     }
 
     public void setHardware(int hardware){
@@ -74,5 +80,7 @@ public class FogNode extends Node{
         result += ">";
         return result; 
     }
+
+
     
 }
