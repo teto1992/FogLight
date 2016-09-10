@@ -10,14 +10,15 @@ package qfog.utils;
  * @author stefano
  */
 public class QoSProfile {
-    private double latency, bandwidth;
+    private int latency;
+    private double bandwidth;
     
-    public QoSProfile (double latency, double bandwidth){
+    public QoSProfile (int latency, double bandwidth){
         this.latency = latency;
         this.bandwidth = bandwidth;
     }
     
-    public void setLatency (double latency){
+    public void setLatency (int latency){
         this.latency = latency;
     }
     
@@ -25,7 +26,7 @@ public class QoSProfile {
         this.bandwidth = bandwidth;
     }
     
-    public double getLatency(){
+    public int getLatency(){
         return this.latency;
     }
     

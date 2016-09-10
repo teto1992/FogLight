@@ -19,27 +19,27 @@ import qfog.utils.QoSProfile;
  */
 public class FogNode extends Node{
     private int hardware;
-    private HashMap<Thing, QoSProfile> reachableThings;
-    private HashSet<Thing> connectedThings;
+    private HashSet<String> reachableThings;
+    private HashSet<String> connectedThings;
     
     public FogNode(String identifier, int hardware, Collection<String> software, double x, double y){
         super.setId(identifier);
         setHardware(hardware);
         super.setSoftware(software);
         super.setCoordinates(x,y);
-        reachableThings = new HashMap<>();
+        reachableThings = new HashSet<>();
         connectedThings = new HashSet<>();
     }
     
-    public boolean addThing(Thing t){
+    public boolean addConnectedThing(String t){
         return connectedThings.add(t);
     }
     
-    public void addReachableThing(Thing t, QoSProfile q) {
-        reachableThings.put(t, q);
+    public void addReachableThing(String t) {
+        reachableThings.add(t);
     }
     
-    public boolean removeThing(Thing t){
+    public boolean removeThing(String t){
         return connectedThings.remove(t);
     }
 
@@ -76,7 +76,7 @@ public class FogNode extends Node{
         @Override
     public String toString(){
         String result = "<";
-        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware) +", "+this.getCoordinates();        
+        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware) +", D "+this.connectedThings+", R " + this.reachableThings+", "+this.getCoordinates();        
         result += ">";
         return result; 
     }

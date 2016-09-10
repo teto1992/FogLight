@@ -7,7 +7,6 @@ package qfog.deployment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import qfog.application.Application;
 import qfog.application.Component;
 import qfog.infrastructure.Infrastructure;
@@ -69,7 +68,7 @@ public class Search {
         Component s = selectUndeployedComponent(deployment);
         for (Node n : K.get(s.getId())) { // for all nodes compatible with s
             if (isValid(deployment, s, n)) {
-                System.out.println(steps + " Deploying " + s + " onto node " + n);
+                System.out.println(steps + " Deploying " + s.getId() + " onto node " + n.getId());
                 deploy(deployment, s, n);
                 HashMap<Component, Node> result = search(deployment);
                 if (result != null) {
@@ -77,7 +76,7 @@ public class Search {
                 }
             }
             if (deployment.containsKey(s)) {
-                System.out.println(steps + " Undeploying " + s + " from node " + n);
+                System.out.println(steps + " Undeploying " + s.getId() + " from node " + n.getId());
                 undeploy(deployment, s, n);
             }
         }
@@ -93,7 +92,7 @@ public class Search {
         Component s = selectUndeployedComponent(deployment);
         for (Node n : K.get(s.getId())) { // for all nodes compatible with s
             if (isValid(deployment, s, n)) {
-                System.out.println(steps + " Deploying " + s + " onto node " + n);
+                System.out.println(steps + " Deploying " + s.getId() + " onto node " + n.getId());
                 deploy(deployment, s, n);
                 HashMap<Component, Node> result = exhaustiveSearch(deployment);
                 if (result != null) {
@@ -101,7 +100,7 @@ public class Search {
                 }
             }
             if (deployment.containsKey(s)) {
-                System.out.println(steps + " Undeploying " + s + " from node " + n);
+                System.out.println(steps + " Undeploying " + s.getId() + " from node " + n.getId());
                 undeploy(deployment, s, n);
             }
         }

@@ -112,6 +112,7 @@ public class QFog {
         
         System.out.println(search.D);
         System.out.println(search.D.size());
+        System.out.println(Phi);
 
     }
     

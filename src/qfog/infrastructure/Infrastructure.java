@@ -6,10 +6,13 @@
 package qfog.infrastructure;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import qfog.utils.Couple;
 import qfog.utils.Link;
 import qfog.utils.Node;
+import qfog.utils.QoSProfile;
 
 /**
  *
@@ -39,13 +42,31 @@ public class Infrastructure {
     }
     
     public void addThing(String identifier, String type, double x, double y, String fogNode) {
-        T.put(identifier, new Thing(identifier, type, x, y) );
-        F.get(fogNode).addThing(T.get(identifier)); 
-        for(Link l: L.values()){
-            if (l.getCouple().getA().equals(fogNode) && F.containsKey(l.getCouple().getB())){
-                F.get(l.getCouple().getB()).addReachableThing(T.get(identifier), l.getQ());
-            } 
-        }
+        Thing t = new Thing(identifier, type, x, y);
+        T.put(identifier, t);
+        FogNode f = F.get(fogNode);
+        Set<Couple> s = new HashSet(L.keySet());
+        for (Couple l: s){
+            System.out.println(l);
+
+            if (l.getA().equals(fogNode)){
+                String fogNode2 = l.getB();
+                if(F.containsKey(fogNode2) && !fogNode2.equals(fogNode)){    
+                    Link r = L.get(l);
+                    int lat = (int) r.getQ().getLatency();
+                    double bw = r.getQ().getBandwidth();
+                    L.put(new Couple(identifier, fogNode2), new Link(identifier, fogNode2, lat, bw ));
+                    System.out.println(fogNode + " " + fogNode2);
+                    r = L.get(new Couple(fogNode2, fogNode));
+                    lat = r.getQ().getLatency();
+                    bw = r.getQ().getBandwidth();
+                    L.put(new Couple(fogNode2,identifier), new Link(fogNode2, identifier, lat, bw ));
+                    
+                }
+            }
+        } 
+        addLink(identifier, fogNode, 0, Double.MAX_VALUE);
+        addLink(fogNode, identifier, 0, Double.MAX_VALUE);
 
     }
     
