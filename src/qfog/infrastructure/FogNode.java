@@ -48,7 +48,7 @@ public class FogNode extends Node{
         int hardwareRequest = component.getHardwareRequirements();
         Collection<String> softwareRequest = component.getSoftwareRequirements();
         
-        return hardwareRequest < this.hardware && 
+        return hardwareRequest <= this.hardware && 
                 softwareRequest.stream().noneMatch(
                         (s) -> (!super.getSoftware().contains(s))
                 );

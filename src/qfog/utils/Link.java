@@ -25,6 +25,7 @@ public class Link {
         q = new QoSProfile(latency, bandwidth);
     }
     
+    @Override
     public String toString(){
         return "("+ this.link.getA() +
                 ", " + this.link.getB() +

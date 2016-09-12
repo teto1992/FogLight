@@ -47,17 +47,17 @@ public class Search {
                 }
             }
         }
-        
+
         for (Component s : A.S) {
             for (FogNode n : Phi.F.values()) {
-                if (n.isCompatible(s) && checkThings(s,n)) {
+                if (n.isCompatible(s) && checkThings(s, n)) {
                     if (!K.containsKey(s.getId())) {
                         K.put(s.getId(), new ArrayList<>());
                     }
                     K.get(s.getId()).add(n);
                 }
             }
-        }       
+        }
 
         return true;
 
@@ -95,28 +95,26 @@ public class Search {
     }
 
     private Deployment exhaustiveSearch(Deployment deployment) {
-        steps++;
         if (isComplete(deployment)) {
             D.add((Deployment) deployment.clone());
+            System.out.println(deployment);
             return null;
         }
         Component s = selectUndeployedComponent(deployment);
-        if (K.get(s.getId()) != null) {
-            for (Node n : K.get(s.getId())) { // for all nodes compatible with s     
+        if (K.get(s.getId())!= null)
+            for (Node n : K.get(s.getId())) { // for all nodes compatible with s 
+                steps++;
+                System.out.println(steps + " Checking " + s.getId() + " onto " + n.getId());
                 if (isValid(deployment, s, n)) {
-                    System.out.println(steps + " Deploying " + s.getId() + " onto node " + n.getId());
+                    System.out.println(steps + " Deploying " + s.getId() + " onto " + n.getId());                    
                     deploy(deployment, s, n);
-                    HashMap<Component, Node> result = exhaustiveSearch(deployment);
-                    if (result != null) {
-                        return deployment;
-                    }
+                    Deployment result = exhaustiveSearch(deployment);
+                    if (result != null)
+                        return result;
                 }
-                if (deployment.containsKey(s)) {
-                    System.out.println(steps + " Undeploying " + s.getId() + " from node " + n.getId());
-                    undeploy(deployment, s, n);
-                }
+                System.out.println(steps + " Undeploying " + s.getId() + " from " + n.getId());
+                undeploy(deployment, s, n);
             }
-        }
         return null;
     }
 
@@ -131,6 +129,7 @@ public class Search {
                 QoSProfile al2 = A.L.get(couple2).getQ();
                 Couple c1 = new Couple(n.getId(), m.getId());
                 Couple c2 = new Couple(m.getId(), n.getId());
+
                 if (Phi.L.containsKey(c1)) {
                     QoSProfile pq1 = Phi.L.get(c1).getQ();
                     QoSProfile pq2 = Phi.L.get(c2).getQ();
@@ -159,9 +158,10 @@ public class Search {
                 if (Phi.L.containsKey(c1)) {
                     Link pl1 = Phi.L.get(c1);
                     Link pl2 = Phi.L.get(c2);
-
+                    System.out.println(al1 + ", " + al2 +" onto " + pl1 + ", " + pl2);
                     pl1.getQ().setBandwidth(pl1.getQ().getBandwidth() - al1.getQ().getBandwidth());
                     pl2.getQ().setBandwidth(pl2.getQ().getBandwidth() - al2.getQ().getBandwidth());
+                    System.out.println(al1 + ", " + al2 +" onto " + pl1 + ", " + pl2);
                 }
             }
         }
@@ -176,14 +176,16 @@ public class Search {
             if (A.L.containsKey(couple1) && A.L.containsKey(couple2)) {
                 Link al1 = A.L.get(couple1);
                 Link al2 = A.L.get(couple2);
-                Couple c1 = new Couple(n.getId(), m.getId());
-                Couple c2 = new Couple(m.getId(), n.getId());
+                Couple c1 = new Couple(m.getId(), n.getId());
+                Couple c2 = new Couple(n.getId(), m.getId());
                 if (Phi.L.containsKey(c1)) {
                     Link pl1 = Phi.L.get(c1);
                     Link pl2 = Phi.L.get(c2);
 
+                    System.out.println(al1 + ", " + al2 +" onto " + pl1 + ", " + pl2);
                     pl1.getQ().setBandwidth(pl1.getQ().getBandwidth() + al1.getQ().getBandwidth());
                     pl2.getQ().setBandwidth(pl2.getQ().getBandwidth() + al2.getQ().getBandwidth());
+                    System.out.println(al1 + ", " + al2 +" onto " + pl1 + ", " + pl2);
                 }
             }
 
@@ -201,9 +203,11 @@ public class Search {
     }
 
     private void undeploy(Deployment deployment, Component s, Node n) {
-        deployment.remove(s);
-        n.undeploy(s);
-        undeployLinks(deployment, s, n);
+        if(deployment.containsKey(s)){
+            deployment.remove(s);
+            n.undeploy(s);
+            undeployLinks(deployment, s, n);
+        }
     }
 
     private Component selectUndeployedComponent(Deployment deployment) {
@@ -216,14 +220,14 @@ public class Search {
 
     private boolean checkThings(Component s, FogNode n) {
         for (ThingsRequirement r : s.getThingsRequirements()) {
-            System.out.println(s.getId()+" "+r.toString());
+            System.out.println(s.getId() + " " + r.toString());
             if (r.getClass() == ExactThing.class) {
                 ExactThing e = (ExactThing) r;
                 if (!(n.isReachable(e.getId()))) {
                     return false;
                 } else {
                     Link get = Phi.L.get(new Couple(n.getId(), e.getId()));
-                    if(get.getQ().getLatency() > e.getQ().getLatency()){
+                    if (get.getQ().getLatency() > e.getQ().getLatency()) {
                         System.out.println(get);
                         return false;
                     }
