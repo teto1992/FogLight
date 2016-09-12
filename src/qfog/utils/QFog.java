@@ -53,8 +53,8 @@ public class QFog {
         A.addComponent("mlengine", asList("spark", "mySQL"), 8);
         A.addComponent("irrigation", asList("python", "c++", "mySQL"), 2);
         A.addComponent("fireflood", asList("python", "c++"), 1);
-        A.addComponent("irrigationGW", asList("c++","linux", "e"), 1, irrigation);
-        A.addComponent("firefloodGW", asList("c++","linux", "e"), 1, fireflood);
+        A.addComponent("irrigationGW", asList("c++","linux"), 1, irrigation);
+        A.addComponent("firefloodGW", asList("c++","linux"), 1, fireflood);
         //links
         A.addLink("insights", "mlengine", 60 , 2);
         A.addLink("insights", "fireflood", 15 , 1);
@@ -72,7 +72,7 @@ public class QFog {
         Phi.addCloudDatacentre("cloud_2", asList("spark", "mySQL", "linux", "windows", "python", "c++"), 44.123896,-122.781555);
         Phi.addFogNode("consortium_1",asList("python", "c++", "mySQL", ".NETcore"), 10, 43.740186, 10.364619);
         Phi.addFogNode("local_1", asList("c++","linux", "python"), 2, 43.7464449,10.4615923);
-        Phi.addFogNode("local_2", asList("c++","linux", "python"), 4, 43.7381285,10.4552213);
+        Phi.addFogNode("local_2", asList("c++","linux", "python", "mySQL"), 4, 43.7381285,10.4552213);
         
         Phi.addLink("local_1", "local_2", 1, 100);
         Phi.addLink("local_1", "consortium_1", 5, 20);
@@ -115,7 +115,6 @@ public class QFog {
         
         System.out.println(search.D);
         System.out.println(search.D.size());
-        System.out.println(Phi);
 
     }
     

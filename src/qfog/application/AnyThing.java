@@ -33,4 +33,9 @@ public class AnyThing extends ThingsRequirement{
     public String getType(){
         return this.type;
     }
+    
+    @Override
+    public String toString(){
+        return type +", " + coord + ", " + maxDist;
+    }
 }

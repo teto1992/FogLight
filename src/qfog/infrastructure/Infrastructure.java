@@ -57,7 +57,7 @@ public class Infrastructure {
                     lat = r.getQ().getLatency();
                     bw = r.getQ().getBandwidth();
                     L.put(new Couple(fogNode2,identifier), new Link(fogNode2, identifier, lat, bw ));
-                    
+                    F.get(fogNode2).addReachableThing(identifier);
                 }
             }
         } 

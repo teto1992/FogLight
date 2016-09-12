@@ -5,13 +5,10 @@
  */
 package qfog.infrastructure;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import qfog.application.Component;
 import qfog.utils.Node;
-import qfog.utils.QoSProfile;
 
 /**
  *
@@ -71,7 +68,7 @@ public class FogNode extends Node{
         @Override
     public String toString(){
         String result = "<";
-        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware) +", R " + this.reachableThings+", "+this.getCoordinates();        
+        result = result + getId() + ", " + super.getSoftware() + ", "+ Integer.toString(this.hardware)+", "+this.getCoordinates();        
         result += ">";
         return result; 
     }

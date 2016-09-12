@@ -7,7 +7,6 @@ package qfog.deployment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import qfog.application.AnyThing;
 import qfog.application.Application;
 import qfog.application.Component;
@@ -16,6 +15,7 @@ import qfog.application.ThingsRequirement;
 import qfog.infrastructure.CloudDatacentre;
 import qfog.infrastructure.FogNode;
 import qfog.infrastructure.Infrastructure;
+import qfog.infrastructure.Thing;
 import qfog.utils.Couple;
 import qfog.utils.Link;
 import qfog.utils.Node;
@@ -36,32 +36,37 @@ public class Search {
         D = new ArrayList<>();
     }
 
-    private void findCompatibleNodes() {
-        for (Node n : Phi.C.values()) {
-            A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
-                if (!K.containsKey(s.getId())) {
-                    K.put(s.getId(), new ArrayList<>());
+    private boolean findCompatibleNodes() {
+        for (Component s : A.S) {
+            for (CloudDatacentre n : Phi.C.values()) {
+                if (s.Theta.isEmpty() && n.isCompatible(s)) {
+                    if (!K.containsKey(s.getId())) {
+                        K.put(s.getId(), new ArrayList<>());
+                    }
+                    K.get(s.getId()).add(n);
                 }
-                return s;
-            }).forEach((s) -> {
-                K.get(s.getId()).add(n);
-            });
+            }
         }
-        for (Node n : Phi.F.values()) {
-            A.S.stream().filter((s) -> (n.isCompatible(s))).map((s) -> {
-                if (checkThings(s,n) && !K.containsKey(s.getId())) {
-                    K.put(s.getId(), new ArrayList<>());
+        
+        for (Component s : A.S) {
+            for (FogNode n : Phi.F.values()) {
+                if (n.isCompatible(s) && checkThings(s,n)) {
+                    if (!K.containsKey(s.getId())) {
+                        K.put(s.getId(), new ArrayList<>());
+                    }
+                    K.get(s.getId()).add(n);
                 }
-                return s;
-            }).forEach((s) -> {
-                K.get(s.getId()).add(n);
-            });
-        }
+            }
+        }       
+
+        return true;
+
     }
 
     public Deployment findDeployment() {
         Deployment deployment = new Deployment();
         findCompatibleNodes();
+        System.out.println(K);
         deployment = exhaustiveSearch(deployment);
         return deployment;
     }
@@ -96,25 +101,26 @@ public class Search {
             return null;
         }
         Component s = selectUndeployedComponent(deployment);
-        for (Node n : K.get(s.getId())) { // for all nodes compatible with s
-            if (isValid(deployment, s, n)) {
-                System.out.println(steps + " Deploying " + s.getId() + " onto node " + n.getId());
-                deploy(deployment, s, n);
-                HashMap<Component, Node> result = exhaustiveSearch(deployment);
-                if (result != null) {
-                    return deployment;
+        if (K.get(s.getId()) != null) {
+            for (Node n : K.get(s.getId())) { // for all nodes compatible with s     
+                if (isValid(deployment, s, n)) {
+                    System.out.println(steps + " Deploying " + s.getId() + " onto node " + n.getId());
+                    deploy(deployment, s, n);
+                    HashMap<Component, Node> result = exhaustiveSearch(deployment);
+                    if (result != null) {
+                        return deployment;
+                    }
                 }
-            }
-            if (deployment.containsKey(s)) {
-                System.out.println(steps + " Undeploying " + s.getId() + " from node " + n.getId());
-                undeploy(deployment, s, n);
+                if (deployment.containsKey(s)) {
+                    System.out.println(steps + " Undeploying " + s.getId() + " from node " + n.getId());
+                    undeploy(deployment, s, n);
+                }
             }
         }
         return null;
     }
 
     private boolean checkLinks(Deployment deployment, Component s, Node n) {
-
         for (Component c : deployment.keySet()) {
             Node m = deployment.get(c); // nodo deployment c
             Couple couple1 = new Couple(c.getId(), s.getId());
@@ -209,20 +215,39 @@ public class Search {
     }
 
     private boolean checkThings(Component s, FogNode n) {
-        for (ThingsRequirement r : s.getThingsRequirements()){
-            if (r.getClass()==ExactThing.class){
-                if (!(n.isReachable(((ExactThing) r).getId()))){
+        for (ThingsRequirement r : s.getThingsRequirements()) {
+            if (r.getClass() == ExactThing.class) {
+                ExactThing e = (ExactThing) r;
+                if (!(n.isReachable(e.getId()))) {
+                    return false;
+                } else {
+                    Link get = Phi.L.get(new Couple(n.getId(), e.getId()));
+                    if(get.getQ().getLatency() > e.getQ().getLatency()){
+                        System.out.println(get);
+                        return false;
+                    }
+                }
+            } else {
+                AnyThing a = (AnyThing) r;
+                System.out.println(n.toString()+r);
+                boolean found = false;
+                for (String tmp : n.getReachableThings()) {
+                    Thing t = Phi.T.get(tmp);
+                    if (n.distance(t) <= a.getDistance()
+                            && a.getType().equals(t.getType())) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false) {
                     return false;
                 }
-            } else{
-                AnyThing a = (AnyThing) r;
-                for (String tmp : n.getReachableThings()){
-                    
-                }
+
             }
         }
+
         return true;
-   
+
     }
 
 }
