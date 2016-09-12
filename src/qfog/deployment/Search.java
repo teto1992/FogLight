@@ -216,6 +216,7 @@ public class Search {
 
     private boolean checkThings(Component s, FogNode n) {
         for (ThingsRequirement r : s.getThingsRequirements()) {
+            System.out.println(s.getId()+" "+r.toString());
             if (r.getClass() == ExactThing.class) {
                 ExactThing e = (ExactThing) r;
                 if (!(n.isReachable(e.getId()))) {
@@ -229,12 +230,13 @@ public class Search {
                 }
             } else {
                 AnyThing a = (AnyThing) r;
-                System.out.println(n.toString()+r);
                 boolean found = false;
                 for (String tmp : n.getReachableThings()) {
                     Thing t = Phi.T.get(tmp);
+                    Link get = Phi.L.get(new Couple(tmp, n.getId()));
                     if (n.distance(t) <= a.getDistance()
-                            && a.getType().equals(t.getType())) {
+                            && a.getType().equals(t.getType())
+                            && get.getQ().getLatency() <= a.getQ().getLatency()) {
                         found = true;
                         break;
                     }

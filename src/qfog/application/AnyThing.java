@@ -6,6 +6,7 @@
 package qfog.application;
 
 import qfog.utils.Coordinates;
+import qfog.utils.QoSProfile;
 
 /**
  *
@@ -16,11 +17,13 @@ public class AnyThing extends ThingsRequirement{
     private double maxDist;
     private String type;
     
-    public AnyThing(String type, double x, double y, double maxDist){
+    public AnyThing(String type, double x, double y, double maxDist, QoSProfile q){
         this.type = type;
         coord = new Coordinates(x,y);
         this.maxDist = maxDist;
+        super.setQ(q);
     }
+
     
     public Coordinates getCoordinates(){
         return this.coord;

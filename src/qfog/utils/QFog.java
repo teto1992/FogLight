@@ -38,7 +38,7 @@ public class QFog {
         irrigation.add(new ExactThing("water0", q));
         irrigation.add(new ExactThing("water1", q));
         irrigation.add(new ExactThing("fertiliser0", q));
-        irrigation.add(new AnyThing("temperature", 43.7464449, 10.4615923, 8.0));
+        irrigation.add(new AnyThing("temperature", 43.7464449, 10.4615923, 8.0, q));
         irrigation.add(new ExactThing("UV0", q));
         irrigation.add(new ExactThing("salts0", q));
         irrigation.add(new ExactThing("moisture0", q));
@@ -58,7 +58,7 @@ public class QFog {
         //links
         A.addLink("insights", "mlengine", 60 , 2);
         A.addLink("insights", "fireflood", 15 , 1);
-        A.addLink("irrigation", "insights", 15 , 1);
+        A.addLink("irrigation", "insights", 15, 1);
         A.addLink("irrigation", "mlengine", 200, 3, 6);
         A.addLink("irrigation", "fireflood", 15, 1);
         A.addLink("irrigationGW", "irrigation", 15, 8, 1);
@@ -115,7 +115,7 @@ public class QFog {
         
         System.out.println(search.D);
         System.out.println(search.D.size());
-
+        System.out.println(Phi);
     }
     
 }
