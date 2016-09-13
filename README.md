@@ -1,2 +1,2 @@
-# Fog-SQuAD 
-A tool for Systemic Qualities (QoS) Aware Deployment over the Fog.
+# FogSQuAD 
+A tool for __Qu__ality of __S__ervice __A__ware __D__eployment over the Fog.
