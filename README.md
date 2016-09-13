@@ -1,2 +1,2 @@
 # FogSQuAD 
-A tool for **Qu**ality of  **S**ervice **A**ware **D**eployment over the Fog.
+A tool for **S**ystemic **Qu**ality of  **S**ervice-**A**ware **D**eployment over the Fog.
