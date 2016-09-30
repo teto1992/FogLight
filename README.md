@@ -1,2 +1,2 @@
-# Fog-SQuAD 
-A tool for Systemic Qualities (QoS) Aware Deployment over the Fog.
+# FogTorch
+A tool for Systemic Quality of  Service-Aware Deployment over the Fog.
