@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.application;
+package fogtorch.application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,13 @@ import java.util.List;
  *
  * @author stefano
  */
-public class Component {
+public class SoftwareComponent {
     String identifier;
     List<String> softwareReqs;
     int hardwareReqs;
-    public ArrayList<ThingsRequirement> Theta;
+    public ArrayList<ThingRequirement> Theta;
 
-    public Component(String identifier, List<String> softwareReqs, int hardwareReqs, ArrayList<ThingsRequirement> Theta){
+    public SoftwareComponent(String identifier, List<String> softwareReqs, int hardwareReqs, ArrayList<ThingRequirement> Theta){
         this.identifier = identifier;
         this.softwareReqs = softwareReqs;
         this.hardwareReqs = hardwareReqs;
@@ -46,7 +46,7 @@ public class Component {
         return result; 
     }
 
-    public Iterable<ThingsRequirement> getThingsRequirements() {
+    public Iterable<ThingRequirement> getThingsRequirements() {
         return this.Theta;
     }
     

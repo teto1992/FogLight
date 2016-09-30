@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.application;
+package fogtorch.application;
 
-import qfog.utils.QoSProfile;
+import fogtorch.utils.QoSProfile;
 
 /**
  *
  * @author stefano
  */
-public abstract class ThingsRequirement {
+public abstract class ThingRequirement {
 
     private QoSProfile q;
     

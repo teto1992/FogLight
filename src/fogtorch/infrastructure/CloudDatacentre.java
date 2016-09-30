@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.infrastructure;
+package fogtorch.infrastructure;
 
 import java.util.Collection;
 import java.util.List;
-import qfog.application.Component;
-import qfog.utils.Node;
+import fogtorch.application.SoftwareComponent;
 
 /**
  *
  * @author stefano
  */
-public class CloudDatacentre extends Node {
+public class CloudDatacentre extends ComputationalNode {
     
     public CloudDatacentre(String identifier, Collection<String> software, double x, double y){
         super.setId(identifier);
@@ -23,18 +22,18 @@ public class CloudDatacentre extends Node {
     }
 
     @Override
-    public boolean isCompatible(Component component) {
+    public boolean isCompatible(SoftwareComponent component) {
         List<String> softwareRequirements = component.getSoftwareRequirements();
         return softwareRequirements.stream().noneMatch((s) 
                 -> (!super.getSoftware().contains(s)));
     }
 
     @Override
-    public void deploy(Component s) {
+    public void deploy(SoftwareComponent s) {
     }
 
     @Override
-    public void undeploy(Component s) {
+    public void undeploy(SoftwareComponent s) {
     }
     
     @Override

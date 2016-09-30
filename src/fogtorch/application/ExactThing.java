@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.application;
+package fogtorch.application;
 
-import qfog.utils.QoSProfile;
+import fogtorch.utils.QoSProfile;
 
 /**
  *
  * @author stefano
  */
-public class ExactThing extends ThingsRequirement{
+public class ExactThing extends ThingRequirement{
     private String id;
 
     public ExactThing(String type, QoSProfile q) {

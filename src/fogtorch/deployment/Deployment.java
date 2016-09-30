@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.deployment;
+package fogtorch.deployment;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import qfog.application.Component;
-import qfog.utils.Node;
+import fogtorch.application.SoftwareComponent;
+import fogtorch.infrastructure.ComputationalNode;
 
 /**
  *
  * @author stefano
  */
-public class Deployment extends HashMap<Component, Node> {
+public class Deployment extends HashMap<SoftwareComponent, ComputationalNode> {
     HashMap<String, HashSet<String>> businessPolicies;
     
     public Deployment(){
@@ -29,7 +29,7 @@ public class Deployment extends HashMap<Component, Node> {
     @Override
     public String toString(){
         String result ="Delta:\n";
-        for (Component s : super.keySet()){
+        for (SoftwareComponent s : super.keySet()){
             result+="\t["+s.getId()+", " +super.get(s).getId()+"]\n";
         }
         return result;   

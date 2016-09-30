@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.application;
+package fogtorch.application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import qfog.utils.Couple;
-import qfog.utils.Link;
+import fogtorch.utils.Couple;
+import fogtorch.utils.QoSProfile;
 
 /**
  *
  * @author stefano
  */
 public class Application {
-    public ArrayList<Component> S;
-    public HashMap<Couple, Link> L;
+    public ArrayList<SoftwareComponent> S;
+    public HashMap<Couple, QoSProfile> L;
     
     public Application(){
         S = new ArrayList<>();
@@ -25,35 +25,35 @@ public class Application {
     }
 
     public void addLink(String a, String b, int latency, double bandwidth) {
-        L.put(new Couple(a,b), new Link(a,b,latency,bandwidth));
-        L.put(new Couple(b,a), new Link(b,a,latency,bandwidth));
+        L.put(new Couple(a,b), new QoSProfile(latency,bandwidth));
+        L.put(new Couple(b,a), new QoSProfile(latency,bandwidth));
     }
 
     public void addLink(String a, String b, int latency, double bandwidthba, double bandwidthab) {
-        L.put(new Couple(a,b), new Link(a,b,latency,bandwidthab));
-        L.put(new Couple(b,a), new Link(b,a,latency,bandwidthba));
+        L.put(new Couple(a,b), new QoSProfile(latency,bandwidthab));
+        L.put(new Couple(b,a), new QoSProfile(latency,bandwidthba));
     }
 
-    public void addComponent(String id, List<String> softwareReqs, int hardwareReqs, ArrayList<ThingsRequirement> Theta) {
-        S.add(new Component(id, softwareReqs, hardwareReqs, Theta));   
+    public void addComponent(String id, List<String> softwareReqs, int hardwareReqs, ArrayList<ThingRequirement> Theta) {
+        S.add(new SoftwareComponent(id, softwareReqs, hardwareReqs, Theta));   
     }
     
     public void addComponent(String id, List<String> softwareReqs, int hardwareReqs) {
-        S.add(new Component(id, softwareReqs, hardwareReqs, new ArrayList<>()));   
+        S.add(new SoftwareComponent(id, softwareReqs, hardwareReqs, new ArrayList<>()));   
     }
     
     @Override
     public String toString(){
         String result = "S = {\n";
         
-        for (Component s: S){
+        for (SoftwareComponent s: S){
             result+="\t"+s;
             result+="\n";
         }
         
         result+="}\n\nLambda = {\n";
         
-        for (Link l : L.values()){
+        for (QoSProfile l : L.values()){
             result+="\t"+l;
             result+="\n";
         }

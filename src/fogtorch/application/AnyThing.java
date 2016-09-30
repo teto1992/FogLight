@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.application;
+package fogtorch.application;
 
-import qfog.utils.Coordinates;
-import qfog.utils.QoSProfile;
+import fogtorch.utils.Coordinates;
+import fogtorch.utils.QoSProfile;
 
 /**
  *
  * @author stefano
  */
-public class AnyThing extends ThingsRequirement{
+public class AnyThing extends ThingRequirement{
     private Coordinates coord;
     private double maxDist;
     private String type;

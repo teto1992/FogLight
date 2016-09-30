@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.infrastructure;
+package fogtorch.infrastructure;
 
 import java.util.Collection;
 import java.util.HashSet;
-import qfog.application.Component;
-import qfog.utils.Node;
+import fogtorch.application.SoftwareComponent;
 
 /**
  *
  * @author stefano
  */
-public class FogNode extends Node{
+public class FogNode extends ComputationalNode{
     private int hardware;
     private HashSet<String> reachableThings;
     
@@ -44,7 +43,7 @@ public class FogNode extends Node{
     }
     
     @Override
-    public boolean isCompatible(Component component){
+    public boolean isCompatible(SoftwareComponent component){
         int hardwareRequest = component.getHardwareRequirements();
         Collection<String> softwareRequest = component.getSoftwareRequirements();
         
@@ -56,12 +55,12 @@ public class FogNode extends Node{
    
 
     @Override
-    public void deploy(Component s) {
+    public void deploy(SoftwareComponent s) {
         this.setHardware(this.getHardware()-s.getHardwareRequirements());
     }
 
     @Override
-    public void undeploy(Component s) {
+    public void undeploy(SoftwareComponent s) {
         this.setHardware(this.getHardware()+s.getHardwareRequirements());
     }
     
@@ -75,6 +74,10 @@ public class FogNode extends Node{
 
     public Iterable<String> getReachableThings() {
         return this.reachableThings;
+    }
+
+    public double distance(Thing t) {
+        return t.getCoordinates().distance(super.getCoordinates());
     }
 
 

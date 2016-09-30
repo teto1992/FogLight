@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.utils;
+package fogtorch.infrastructure;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import qfog.application.Component;
+import fogtorch.application.SoftwareComponent;
+import fogtorch.utils.Coordinates;
 
 /**
  *
  * @author stefano
  */
-public abstract class Node {
-    private ArrayList<String> software;
+public abstract class ComputationalNode {
     private String identifier;
+    private ArrayList<String> software;
     private Coordinates coords;
     
     public void setSoftware(Collection<String> software){
@@ -42,15 +43,15 @@ public abstract class Node {
         return this.coords;
     }
     
-    public double distance(Node n){
+    public double distance(ComputationalNode n){
         return getCoordinates().distance(n.getCoordinates());
     }
     
-    public abstract boolean isCompatible(Component component);
+    public abstract boolean isCompatible(SoftwareComponent s);
 
-    public abstract void deploy(Component s);
+    public abstract void deploy(SoftwareComponent s);
      
-    public abstract void undeploy(Component s);
+    public abstract void undeploy(SoftwareComponent s);
 
         
 }

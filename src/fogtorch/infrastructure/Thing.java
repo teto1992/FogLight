@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qfog.infrastructure;
+package fogtorch.infrastructure;
 
-import qfog.application.Component;
-import qfog.utils.Coordinates;
-import qfog.utils.Node;
+import fogtorch.application.SoftwareComponent;
+import fogtorch.utils.Coordinates;
 
 
 /**
  *
  * @author stefano
  */
-public class Thing extends Node {
+public class Thing {
     private final String identifier, type;
     private Coordinates coords;
     
@@ -46,19 +45,6 @@ public class Thing extends Node {
         result = result + this.identifier + ", " + this.type + ", "+ this.getCoordinates();        
         result += ">";
         return result; 
-    }
-
-    @Override
-    public boolean isCompatible(Component component) {
-        return true;
-    }
-
-    @Override
-    public void deploy(Component s) {
-     }
-
-    @Override
-    public void undeploy(Component s) {
     }
 
 }
