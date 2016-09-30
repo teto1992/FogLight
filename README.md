@@ -1,2 +1,2 @@
 # FogLight
-A tool for **S**ystemic **Qu**ality of  **S**ervice-**A**ware **D**eployment over the Fog.
+A tool for Systemic Quality of  Service-Aware Deployment over the Fog.
